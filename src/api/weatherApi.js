@@ -9,8 +9,7 @@ export const fetchIpLocation = () => {
         resolve(response.data);
       })
       .catch((error) => {
-        console.log(error.message);
-        reject(error.message);
+        reject({ status: error.response.status });
       });
   });
 };
@@ -22,8 +21,7 @@ export const fetchWeatherData = (searchString) => {
         resolve(response.data);
       })
       .catch((error) => {
-        console.log(error.message);
-        reject(error.message);
+        reject({ status: error.response.status });
       });
   });
 };
@@ -36,8 +34,7 @@ export const fetchForecastData = (searchString) => {
         resolve(response.data);
       })
       .catch((error) => {
-        console.log(error.message);
-        reject(error.message);
+        reject({ status: error.response.status });
       });
   });
 };

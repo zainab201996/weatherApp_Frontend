@@ -1,5 +1,6 @@
 import { React, useEffect, useState } from "react";
-import { Button, Layout, Row, Col } from "antd";
+import { NavLink } from "react-router-dom";
+import { Layout, Row, Col, notification } from "antd";
 import "../css/WeatherDisplayComponent.css";
 import { CaretLeftOutlined, CaretRightFilled } from "@ant-design/icons";
 import {
@@ -41,41 +42,48 @@ const barLayoutStyle = {
 
 const currentWeatherStyle = { height: "22em" };
 const forecastWeatherStyle = { height: "22em" };
-
+const iconStyle = { fontSize: "3.5em" };
 const WeatherDisplayComponent = ({ currentMode }) => {
   async function getWeatherData(searchString) {
-    let weatherData = await fetchWeatherData(searchString);
-    setCurrentWeatherData({
-      city: weatherData.location.name || "N/A",
-      country: weatherData.location.country || "N/A",
-      state: weatherData.location.region || "N/A",
-      temperature_in_c: weatherData.temperature_in_c || "",
-      temperature_in_f: weatherData.temperature_in_f || "",
-      condition: weatherData.weather_condition || "",
-      icon_url: weatherData.weather_icon_url || "",
-      date: new Date(weatherData.current_time.split(" ")[0]) || "",
-      time: weatherData.current_time.split(" ")[1] || "",
-    });
-    setIsLoading(false);
+    try {
+      let weatherData = await fetchWeatherData(searchString);
+      setCurrentWeatherData({
+        city: weatherData.location.name || "N/A",
+        country: weatherData.location.country || "N/A",
+        state: weatherData.location.region || "N/A",
+        temperature_in_c: weatherData.temperature_in_c || "",
+        temperature_in_f: weatherData.temperature_in_f || "",
+        condition: weatherData.weather_condition || "",
+        icon_url: weatherData.weather_icon_url || "",
+        date: new Date(weatherData.current_time.split(" ")[0]) || "",
+        time: weatherData.current_time.split(" ")[1] || "",
+      });
+      setIsLoading(false);
+    } catch (error) {
+      openNotification(error.status);
+    }
   }
   async function getForecastData() {
-    let weatherData = await fetchForecastData(currentWeatherData.city);
-    console.log(weatherData);
-    setCurrentWeatherData({
-      city: weatherData.location.name || "N/A",
-      country: weatherData.location.country || "N/A",
-      state: weatherData.location.region || "N/A",
-      temperature_in_c: weatherData.temperature_in_c || "",
-      temperature_in_f: weatherData.temperature_in_f || "",
-      condition: weatherData.weather_condition || "",
-      icon_url: weatherData.weather_icon_url || "",
-      date: new Date(weatherData.current_time.split(" ")[0]) || "",
-      time: weatherData.current_time.split(" ")[1] || "",
-    });
-    setForecastData(weatherData.forecast_array);
+    try {
+      let weatherData = await fetchForecastData(currentWeatherData.city);
+
+      setCurrentWeatherData({
+        city: weatherData.location.name || "N/A",
+        country: weatherData.location.country || "N/A",
+        state: weatherData.location.region || "N/A",
+        temperature_in_c: weatherData.temperature_in_c || "",
+        temperature_in_f: weatherData.temperature_in_f || "",
+        condition: weatherData.weather_condition || "",
+        icon_url: weatherData.weather_icon_url || "",
+        date: new Date(weatherData.current_time.split(" ")[0]) || "",
+        time: weatherData.current_time.split(" ")[1] || "",
+      });
+      setForecastData(weatherData.forecast_array);
+    } catch (error) {
+      console.log(error);
+    }
   }
   function updateWeatherData(weatherData) {
-    console.log(weatherData);
     setCurrentWeatherData({
       ...currentWeatherData,
       temperature_in_c: weatherData.temperature_in_c || "",
@@ -90,17 +98,22 @@ const WeatherDisplayComponent = ({ currentMode }) => {
   async function handleMode() {
     if (isCurrent) {
       await getForecastData();
-      navigate("/weather/forecast");
     } else {
       await getWeatherData(currentWeatherData.city);
-      navigate("/weather/current");
+      setIsCurrent(!isCurrent);
     }
-    setIsCurrent(!isCurrent);
   }
+
   useEffect(() => {
     async function fetchLocationData() {
-      const location = await fetchIpLocation();
-      getWeatherData(`${location.longitude},${location.latitude}`);
+      const storedData = localStorage.getItem("city_name");
+      if (storedData === undefined) {
+        getWeatherData(storedData);
+      } else {
+        const location = await fetchIpLocation();
+        getWeatherData(`${location.longitude},${location.latitude}`);
+      }
+
       setIsCurrent(currentMode);
     }
     fetchLocationData();
@@ -110,22 +123,34 @@ const WeatherDisplayComponent = ({ currentMode }) => {
       setForecastData({});
       setIsCurrent(true);
     };
-  }, [currentMode]);
+  }, []);
+  const openNotification = (status_code) => {
+    notification.error({
+      message: "Error",
+      description: `Search key should be a valid name of country, city or state.
+         It can also be a longitude,latitude pair separated by comma`,
+      onClick: () => {},
+    });
+  };
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [currentWeatherData, setCurrentWeatherData] = useState({});
   const [forecastData, setForecastData] = useState({});
   const [isCurrent, setIsCurrent] = useState(currentMode);
+  useEffect(() => {
+    setIsCurrent(!isCurrent);
+  }, [forecastData]);
+  useEffect(() => {
+    localStorage.setItem("city_name", currentWeatherData.city);
+  }, [currentWeatherData]);
   return !isLoading ? (
     <div>
       {!isCurrent ? (
         <Row>
           <Col sm={1} xs={4} style={{ display: "contents" }}>
-            <Button
-              type="link"
-              onClick={handleMode}
-              icon={<CaretLeftOutlined />}
-            />
+            <NavLink to="/weather/current" onClick={handleMode}>
+              <CaretLeftOutlined style={iconStyle} />
+            </NavLink>
           </Col>
           <Col sm={23} xs={20}>
             <LocationDisplayComponent
@@ -217,14 +242,12 @@ const WeatherDisplayComponent = ({ currentMode }) => {
                 <div
                   style={{
                     background: "white",
-                    borderRadius: 15,
+                    borderRadius: 30,
                   }}
                 >
-                  <Button
-                    type="link"
-                    icon={<CaretRightFilled />}
-                    onClick={handleMode}
-                  />
+                  <NavLink to="/weather/forecast" onClick={handleMode}>
+                    <CaretRightFilled style={iconStyle} />
+                  </NavLink>
                 </div>
               </Col>
             ) : (

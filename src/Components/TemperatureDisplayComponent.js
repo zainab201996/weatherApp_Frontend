@@ -1,4 +1,4 @@
-import React from "react";
+import { useState, React } from "react";
 
 const TemperatureDisplayComponent = ({ temperature }) => {
   const conditionStyle = {
@@ -11,11 +11,24 @@ const TemperatureDisplayComponent = ({ temperature }) => {
     margin: "auto",
     fontWeight: "200",
   };
+  const handleChange = (event) => {
+    console.log(temperature);
+    setisCentigrade(!isCentigrade);
+  };
+  const [isCentigrade, setisCentigrade] = useState(true);
   return (
     <div>
       <div style={{ textAlign: "center" }}>
         <p style={conditionStyle}>{temperature.condition}</p>
-        <p style={temperatureStyle}>{`${temperature.temperature_in_c}°C`}</p>
+        <p style={temperatureStyle} onClick={handleChange}>
+          {isCentigrade
+            ? `${
+                temperature.temperature_in_c === ""
+                  ? 0
+                  : temperature.temperature_in_c
+              }°C`
+            : `${temperature.temperature_in_f}°F`}
+        </p>
       </div>
     </div>
   );
