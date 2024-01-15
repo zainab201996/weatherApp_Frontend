@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "http://localhost:5000/";
+const url = "https://weather-app-backend-laed.onrender.com/";
 export const fetchIpLocation = () => {
   return new Promise((resolve, reject) => {
     axios
