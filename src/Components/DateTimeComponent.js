@@ -25,7 +25,7 @@ const DateTimeComponent = ({ dateTime }) => {
                   <h1 style={timeStyle}>{dateTime.time} PM</h1>
                 ) : (
                   <h1 style={timeStyle}>
-                    {dateTime.time == "00:00" ? "12:00" : dateTime.time} AM
+                    {dateTime.time === "00:00" ? "12:00" : dateTime.time} AM
                   </h1>
                 )}
               </div>

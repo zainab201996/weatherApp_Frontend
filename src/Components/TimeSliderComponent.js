@@ -6,7 +6,7 @@ const TimeSliderComponent = ({
   currentHour,
 }) => {
   const formatHour = (hour) => {
-    const formatted_time = hour == 0 || hour == 12 ? 12 : hour % 12;
+    const formatted_time = hour === 0 || hour === 12 ? 12 : hour % 12;
     return hour > 11 ? `${formatted_time} PM` : `${formatted_time} AM`;
   };
   function handleChange(value) {
@@ -25,10 +25,7 @@ const TimeSliderComponent = ({
     0: "12 AM",
     23: "11 PM",
   };
-  useEffect(() => {
-    console.log(currentHour);
-    return () => {};
-  }, []);
+
   const [sliderValue, setSliderValue] = useState("");
   const [timeValue, setTimeValue] = useState("12 AM");
   return (

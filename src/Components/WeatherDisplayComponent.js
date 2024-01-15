@@ -110,7 +110,7 @@ const WeatherDisplayComponent = ({ currentMode }) => {
       setForecastData({});
       setIsCurrent(true);
     };
-  }, []);
+  }, [currentMode]);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [currentWeatherData, setCurrentWeatherData] = useState({});
