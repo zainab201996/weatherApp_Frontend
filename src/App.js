@@ -5,10 +5,11 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
+import "./css/Application.css";
 import WeatherDisplayComponent from "./Components/WeatherDisplayComponent.js";
 const App = () => {
   return (
-    <div style={{ marginTop: "4em", marginRight: "0.1em" }}>
+    <div>
       <Router>
         <Routes>
           <Route

@@ -1,9 +1,12 @@
 import { React } from "react";
-import { Image } from "antd";
+import "../css/WeatherIcon.css";
 const WeatherIconComponent = ({ icon_url }) => {
+  const handleClick = (e) => {
+    e.preventDefault();
+  };
   return (
     <div>
-      <Image width={"7.5em"} src={icon_url} />
+      <img className="weather-icon" src={icon_url} onClick={handleClick} />
     </div>
   );
 };

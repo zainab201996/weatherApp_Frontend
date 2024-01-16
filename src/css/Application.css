@@ -1,0 +1,7 @@
+@media (min-width: 375px) {
+  body {
+    min-width: 375px;
+    margin-top: 4em;
+    margin-right: 0.1em;
+  }
+}

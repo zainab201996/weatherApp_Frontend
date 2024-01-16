@@ -1,0 +1,99 @@
+@media screen and (max-width: 700px) {
+  .responsive-forecast-link {
+    position: absolute;
+    top: 50%;
+    right: 0.5%;
+    transform: translate(-50%, -50%);
+    width: 3.5em;
+    height: 3.5em;
+    border-radius: 2em;
+    background-color: white;
+    z-index: 1;
+  }
+
+  .content-layout {
+    border-radius: 1em;
+    overflow: hidden;
+    margin-left: 12.5%;
+    margin-right: 12.5%;
+    width: 75%;
+    max-width: 80%;
+    background: #4096ff;
+    color: #ffffff;
+  }
+  .bar-layout {
+    border-radius: 1em;
+    overflow: hidden;
+    margin-left: 12.5%;
+    margin-right: 12.5%;
+    width: 75%;
+    max-width: 80%;
+    background: #ffffff;
+  }
+}
+/* IPAD AND TABLET SPECIFIC */
+@media screen and (min-width: 700px) and (max-width: 1200px) {
+  .responsive-forecast-link {
+    position: absolute;
+    top: 50%;
+    right: 18.5%;
+    transform: translate(-50%, -50%);
+    width: 3.5em;
+    height: 3.5em;
+    border-radius: 2em;
+    background-color: white;
+    z-index: 1;
+  }
+  .content-layout {
+    border-radius: 1em;
+    overflow: hidden;
+    margin-left: 25%;
+    margin-right: 25%;
+    width: 50%;
+    max-width: 60%;
+    background: #4096ff;
+    color: #ffffff;
+  }
+  .bar-layout {
+    border-radius: 1em;
+    overflow: hidden;
+    margin-left: 25%;
+    margin-right: 25%;
+    width: 50%;
+    max-width: 60%;
+    background: #ffffff;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .responsive-forecast-link {
+    position: absolute;
+    top: 50%;
+    right: 21%;
+    transform: translate(-50%, -50%);
+    width: 3.5em;
+    height: 3.5em;
+    border-radius: 2em;
+    background-color: white;
+    z-index: 1;
+  }
+
+  .content-layout {
+    border-radius: 1em;
+    overflow: hidden;
+    margin-left: 25%;
+    margin-right: 25%;
+    width: 50%;
+    max-width: 60%;
+    background: #4096ff;
+    color: #ffffff;
+  }
+  .bar-layout {
+    border-radius: 1em;
+    overflow: hidden;
+    margin-left: 25%;
+    margin-right: 25%;
+    width: 50%;
+    max-width: 60%;
+    background: #ffffff;
+  }
+}

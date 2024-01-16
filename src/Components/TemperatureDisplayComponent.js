@@ -12,7 +12,6 @@ const TemperatureDisplayComponent = ({ temperature }) => {
     fontWeight: "200",
   };
   const handleChange = (event) => {
-    console.log(temperature);
     setisCentigrade(!isCentigrade);
   };
   const [isCentigrade, setisCentigrade] = useState(true);
