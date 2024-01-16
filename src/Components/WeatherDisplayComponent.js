@@ -35,6 +35,7 @@ const WeatherDisplayComponent = ({ currentMode }) => {
     const fetchLocationData = async () => {
       try {
         const location = await fetchIpLocation();
+
         const weatherData = await fetchWeatherData(
           `${location.latitude},${location.longitude}`
         );
