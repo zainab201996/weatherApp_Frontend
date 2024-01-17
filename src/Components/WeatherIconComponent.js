@@ -8,7 +8,7 @@ const WeatherIconComponent = ({ icon_url }) => {
     <div>
       <img
         className="weather-icon"
-        alt="Image Icon"
+        alt="Weather Icon"
         src={icon_url}
         onClick={handleClick}
       />

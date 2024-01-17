@@ -1,6 +1,5 @@
 import { React, useState } from "react";
 import { Button, Flex, Input } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
 
 const SearchBarComponent = ({ setWeatherData }) => {
   const [searchString, setSearchString] = useState("");

@@ -8,7 +8,6 @@ import {
   fetchForecastData,
   fetchIpLocation,
 } from "../api/weatherApi.js";
-import { useNavigate } from "react-router-dom";
 import SearchBarComponent from "./SearchBarComponent.js";
 import LocationDisplayComponent from "./LocationDisplayComponent.js";
 import TemperatureDisplayComponent from "./TemperatureDisplayComponent.js";

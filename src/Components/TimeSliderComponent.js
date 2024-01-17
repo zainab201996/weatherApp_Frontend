@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import { React, useState } from "react";
 import { Slider } from "antd";
 const TimeSliderComponent = ({ updateWeatherData, forecast_array }) => {
   const formatHour = (hour) => {
