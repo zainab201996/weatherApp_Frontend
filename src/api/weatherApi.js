@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "https://weather-app-backend-laed.onrender.com/";
+const url = "https://zany-plum-crab-belt.cyclic.app/";
 export const fetchIpLocation = () => {
   return new Promise((resolve, reject) => {
     navigator.geolocation.getCurrentPosition(async (position) => {
