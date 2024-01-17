@@ -2,7 +2,7 @@ import { React, useEffect, useState } from "react";
 import { Slider } from "antd";
 const TimeSliderComponent = ({ updateWeatherData, forecast_array }) => {
   const formatHour = (hour) => {
-    const formatted_time = hour == 0 || hour == 12 ? 12 : hour % 12;
+    const formatted_time = hour === "0" || hour === "12" ? 12 : hour % 12;
     return hour > 11 ? `${formatted_time} PM` : `${formatted_time} AM`;
   };
   function handleChange(value) {

@@ -6,7 +6,12 @@ const WeatherIconComponent = ({ icon_url }) => {
   };
   return (
     <div>
-      <img className="weather-icon" src={icon_url} onClick={handleClick} />
+      <img
+        className="weather-icon"
+        alt="Image Icon"
+        src={icon_url}
+        onClick={handleClick}
+      />
     </div>
   );
 };
